@@ -1,13 +1,10 @@
 import express from "express";
-import Core from "./core/core";
-import { inject } from "inversify";
-import container from "./core/container";
-import LoggerService from "./core/services/LoggerService";
-import {LoggerInterface} from "./core/interfaces/LoggerInterface";
+import { Core } from "./core/core";
+import { LoggerService } from "./core/services";
 
-class Main {
+export class Main {
+
     public app: express.Application;
-    private _log: any;
 
     public static bootstrap(): Main {
         return new Main();
@@ -15,11 +12,14 @@ class Main {
 
     constructor() {
         this.app = express();
-        this._log = container.get("LoggerService");
-        this._log.setDebug(true);
-        new Core(this.app, container);
+
+        let config = require("../config/config." + process.env.NODE_ENV + ".json");
+        this.setLogs(config.debug);
+        new Core(this.app, config);
+    }
+
+    protected setLogs(debug: boolean){
+        let log = LoggerService.getInstance();
+        log.setDebug(true);
     }
 }
-
-var server = Main.bootstrap();
-export default server.app;

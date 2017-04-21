@@ -1,4 +1,1 @@
-import LoggerService from "./LoggerService";
-export default {
-    LoggerService
-};
+export * from "./logger.service";

@@ -7,8 +7,7 @@
     "experimentalDecorators": true,
     "module": "es2015",
     "moduleResolution": "node",
-    "target": "es5",
-    "types": ["reflect-metadata"]
+    "target": "es6"
   },
   "exclude": [
     "node_modules"

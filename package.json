@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon dist/bundle.js",
     "build": "rollup -c",
-    "dev": "rollup -c -w"
+    "build:dev": "rollup -c -w"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -17,6 +17,8 @@
     "@types/body-parser": "^1.16.3",
     "@types/debug": "^0.0.29",
     "@types/express": "^4.0.35",
+    "@types/reflect-metadata": "^0.0.5",
+    "reflect-metadata": "^0.1.10",
     "rollup": "^0.41.6",
     "rollup-plugin-gzip": "^1.1.0",
     "rollup-plugin-json": "^2.1.1",

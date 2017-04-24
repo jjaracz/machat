@@ -1,8 +1,8 @@
 export class LoggerService {
 
-    protected static instance: LoggerService;
-    protected debug: boolean;
-    protected colors: any = {
+    private static instance: LoggerService;
+    private static debug: boolean;
+    private static colors: any = {
         "reset": "\x1b[0m",
         "black": "\x1b[30m",
         "red": "\x1b[31m",
@@ -17,7 +17,7 @@ export class LoggerService {
      *
      * @type {[string,string,string,string,string,string,string]}
      */
-    protected presets: any = [
+    private static presets: any = [
         "-------------",
         "INVOKED",
         "ADDED",
@@ -27,23 +27,17 @@ export class LoggerService {
         "SET VAR%e: "
     ];
 
-    protected constructor() {}
-
-    /**
-     *
-     * @returns {LoggerService}
-     */
-    public static getInstance(): LoggerService {
-        return this.instance ? this.instance : this.instance = new LoggerService();
-    }
-
     /**
      *
      * @param debug
      */
-    public setDebug(debug: boolean):void {
+    public static setDebug(debug: boolean):void {
         this.debug = debug;
         console.log("SET DEBUG: ", this.debug);
+    }
+
+    public static getDebug(): boolean{
+        return this.debug;
     }
 
     /**
@@ -51,7 +45,7 @@ export class LoggerService {
      * @param config
      * @param args
      */
-    public log(config: any, ...args: Array<any>): void {
+    public static log(config: any, ...args: Array<any>): void {
         if(!this.debug) return;
 
         let method: string,
@@ -84,7 +78,50 @@ export class LoggerService {
         }
         if (typeof color != "undefined") {
             strs.unshift(color);
+            strs.push(this.colors.reset);
         }
         console[method](...strs);
+    }
+
+    public static green(...args: Array<any>){
+        if(!this.debug) return;
+        args[0] = this.colors.green + args[0];
+        args[args.length-1] = args[args.length-1] + this.colors.reset;
+        console.log.apply(console, args);
+    }
+
+    public static yellow(...args){
+        if(!this.debug) return;
+        args[0] = this.colors.yellow + args[0];
+        args[args.length-1] = args[args.length-1] + this.colors.reset;
+        console.log.apply(console, args);
+    }
+
+    public static blue(...args){
+        if(!this.debug) return;
+        args[0] = this.colors.blue + args[0];
+        args[args.length-1] = args[args.length-1] + this.colors.reset;
+        console.log.apply(console, args);
+    }
+
+    public static magenta(...args){
+        if(!this.debug) return;
+        args[0] = this.colors.magenta + args[0];
+        args[args.length-1] = args[args.length-1] + this.colors.reset;
+        console.log.apply(console, args);
+    }
+
+    public static red(...args){
+        if(!this.debug) return;
+        args[0] = this.colors.red + args[0];
+        args[args.length-1] = args[args.length-1] + this.colors.reset;
+        console.log.apply(console, args);
+    }
+
+    public static cyan(...args){
+        if(!this.debug) return;
+        args[0] = this.colors.cyan + args[0];
+        args[args.length-1] = args[args.length-1] + this.colors.reset;
+        console.log.apply(console, args);
     }
 }

@@ -1,6 +1,7 @@
-import { Main } from "./main";
+import { Core } from "./core/core";
 import debug from "debug";
 import http from "http";
+import config from "./config/config.dev.json";
 
 class App {
 
@@ -10,8 +11,8 @@ class App {
 
     constructor(){
         //get port from environment and store in Express.
-        this.app = Main.bootstrap().app;
-        this.port = this.normalizePort(process.env.PORT || 8080);
+        this.app = new Core().bootstrap();
+        this.port = this.normalizePort(config.port|| 8080);
         this.app.set("port", this.port);
 
         this.server = http.createServer(this.app);
@@ -25,7 +26,7 @@ class App {
      * Normalize a port into a number, string, or false.
      */
     private normalizePort(val) {
-        var port = parseInt(val, 10);
+        let port = parseInt(val, 10);
 
         if (isNaN(port)) {
             // named pipe
@@ -48,7 +49,7 @@ class App {
             throw error;
         }
 
-        var bind = typeof this.port === "string"
+        let bind = typeof this.port === "string"
             ? "Pipe " + this.port
             : "Port " + this.port;
 
@@ -71,8 +72,8 @@ class App {
      * Event listener for HTTP server "listening" event.
      */
     private onListening() {
-        var addr = this.server.address();
-        var bind = typeof addr === "string"
+        let addr = this.server.address();
+        let bind = typeof addr === "string"
             ? "pipe " + addr
             : "port " + addr.port;
         debug("Listening on " + bind);

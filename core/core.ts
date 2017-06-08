@@ -35,7 +35,7 @@ export class Core {
         this.app = express();
         this.config = Object.assign(require("../config/config." + env + ".json"), configDefault);
         this.setApp();
-        this.setRoutes();
+        // this.setRoutes();
         // LoggerService.red("BOOOOOOO");
         return this.app;
     }
@@ -49,11 +49,11 @@ export class Core {
             err.status = 404;
             next(err);
         });
-        this.app.get("/hi", (req, res) => {
+        this.app.get("/", (req, res) => {
             res.send("<h1>WORKS!!</h1>");
         })
     }
-
+ 
     private setRoutes(){
         const routes = require("../"+this.config.server.routes);
         for(let route in routes){

@@ -17,7 +17,7 @@ let configDefault = {
         "controllers": "app/controllers",
         "models": "app/models"
     }
-};
+}; 
 
 @Log
 export class Core {

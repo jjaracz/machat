@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon dist/bundle.js",
+    "start": "node dist/bundle.js",
     "build": "rollup -c",
     "build:dev": "rollup -c -w"
   },

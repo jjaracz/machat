@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "rollup -c && node dist/bundle.js",
-    "build": "rollup -c",
+    "start": "node /dist/bundle.js",
+    "heroku-postbuild": "rollup -c",
     "build:dev": "rollup -c -w"
   },
   "dependencies": {

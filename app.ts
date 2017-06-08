@@ -3,6 +3,9 @@ import debug from "debug";
 import http from "http";
 import config from "./config/config.dev.json";
 
+require("typescript-require-latest-typescript");
+
+
 class App {
 
     private port: any;

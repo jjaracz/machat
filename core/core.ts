@@ -18,9 +18,9 @@ let configDefault = {
         "models": "app/models"
     }
 };
+
 @Log
 export class Core {
-
     protected app: express.Application;
     protected log: LoggerService;
     @LogParam protected config: any;
@@ -35,11 +35,12 @@ export class Core {
         this.app = express();
         this.config = Object.assign(require("../config/config." + env + ".json"), configDefault);
         this.setApp();
+        this.setRoutes();
         // LoggerService.red("BOOOOOOO");
         return this.app;
     }
 
-    protected setApp(){
+    private setApp(): void{
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(express.static(path.join(__dirname, "..", this.config.server.statics)));
@@ -48,9 +49,18 @@ export class Core {
             err.status = 404;
             next(err);
         });
-        this.app.get("/", (req, res) => {
+        this.app.get("/hi", (req, res) => {
             res.send("<h1>WORKS!!</h1>");
         })
+    }
+
+    private setRoutes(){
+        const routes = require("../"+this.config.server.routes);
+        for(let route in routes){
+            this.app.get(route, (req, res) => {
+                res.send(require("../"+this.config.server.controllers+"/"+(routes[route].name || "Main")+".ts")[(routes[route].action || "index")]());
+            })
+        }
     }
 
 }

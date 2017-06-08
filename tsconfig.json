@@ -7,7 +7,13 @@
     "experimentalDecorators": true,
     "module": "es2015",
     "moduleResolution": "node",
-    "target": "es6"
+    "target": "es6",
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": [ "app/shared/*"],
+      "@core/*": ["core/*"],
+      "@config/*": ["config/*"]
+    }
   },
   "exclude": [
     "node_modules"

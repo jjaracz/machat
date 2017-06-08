@@ -1,0 +1,9 @@
+{
+    "/": {
+        "type": "http",
+        "Controller": {
+            "name": "Main",
+            "action": "index"
+        }
+    }
+}

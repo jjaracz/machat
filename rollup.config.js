@@ -5,6 +5,7 @@ import json from "rollup-plugin-json";
 import replace from 'rollup-plugin-replace';
 import gzip from "rollup-plugin-gzip";
 import uglify from "rollup-plugin-uglify";
+import {minify} from "uglify-es";
 let config = require("./config/config.dev.json");
 
 export default {
@@ -17,9 +18,6 @@ export default {
 		replace({
 			"process.env.NODE_ENV": JSON.stringify(config.env)
 		}),
-		resolve({
-			"shared@": "./app/shared/"
-		}),
 		nodeResolve({
 			jsnext: true,
 			main: true,
@@ -29,7 +27,7 @@ export default {
 			typescript : require('typescript')
 		}),
 		json(),
-		// uglify(),
+		// uglify({}, minify),
 		gzip()
 	],
 	external: [

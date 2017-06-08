@@ -5,6 +5,8 @@ import path from "path";
 import { LoggerService } from "./services";
 import { LogParam, LogMethod, Log } from "./decorators";
 
+require("typescript-require-latest-typescript");
+
 let configDefault = {
     "port": 3000,
     "host": "127.0.0.1",
@@ -52,6 +54,7 @@ export class Core {
         this.app.get("/", (req, res) => {
             res.send("<h1>WORKS!!</h1>");
         })
+        // let a = require("../app/controllers/Main.ts"); 
     }
  
     private setRoutes(){
